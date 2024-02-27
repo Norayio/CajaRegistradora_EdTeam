@@ -8,8 +8,8 @@ public abstract class Product {
 
 
     public Product(){ // constructor
-
     }
+
     public Product(String n){ // constructor
         this.name = n;
     }
