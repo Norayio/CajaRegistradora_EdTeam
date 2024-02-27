@@ -10,7 +10,6 @@ public abstract class Product {
     public Product(){ // constructor
 
     }
-
     public Product(String n){ // constructor
         this.name = n;
     }
@@ -49,6 +48,16 @@ public abstract class Product {
             return; // en ez de el else, utilizamos el return.
         }
         this.price = price;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", amount=" + amount +
+                ", price=" + price +
+                '}';
     }
 
 
