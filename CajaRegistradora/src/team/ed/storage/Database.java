@@ -22,4 +22,21 @@ public class Database {
         products[2] = meat;
     }
 
+
+    // metodos
+    public Product getByIndex(int i){
+
+        if (i < 0 || i > 2){
+            System.out.println("Índice no válido");
+            return null;
+        }
+        return products[i];
+    }
+
+    public Product[] getAll(){
+        return products;
+    }
+
+
+
 }
