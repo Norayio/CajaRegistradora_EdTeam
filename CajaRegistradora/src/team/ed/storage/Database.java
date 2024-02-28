@@ -5,9 +5,14 @@ import team.ed.objects.Potato;
 import team.ed.objects.Product;
 import team.ed.objects.Rice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Database {
 
     private Product[] products;
+    private List<Product> purchases;
+    private List<Product> sales;
 
 
     public Database() {
@@ -20,6 +25,9 @@ public class Database {
         products[0] = potato;
         products[1] = rice;
         products[2] = meat;
+
+        purchases = new ArrayList<>();
+        sales = new ArrayList<>();
     }
 
 
@@ -36,11 +44,85 @@ public class Database {
         }catch (CloneNotSupportedException cnse){
             System.out.println(cnse);
         }
+
         return result;
     }
 
     public Product[] getAll(){
-        return products;
+
+        Product[] result = new Product[3];
+        try {
+            result[0] = products[0].clone();
+            result[1] = products[1].clone();
+            result[2] = products[2].clone();
+        }catch (CloneNotSupportedException cnse){
+            System.out.println(cnse);
+        }
+
+        return result;
+    }
+
+
+    public void buy(Product product){ // metodo
+
+        Product temp;
+        switch (product.getClass().getSimpleName()){
+            case "Potato":
+                temp = products[0];
+                break;
+
+            case "Rice":
+                temp = products[1];
+                break;
+
+            case "Meat":
+                temp = products[2];
+                break;
+
+            default:
+                System.out.println("No válido");
+                return; // en vez de break xd
+        }
+
+        temp.setAmount(temp.getAmount() + product.getAmount());
+        temp.setPrice(product.getPrice());
+
+        purchases.add(product);
+    }
+
+    public void sale(Product product){ // metodo
+
+        Product temp;
+        switch (product.getClass().getSimpleName()){
+            case "Potato":
+                temp = products[0];
+                break;
+
+            case "Rice":
+                temp = products[1];
+                break;
+
+            case "Meat":
+                temp = products[2];
+                break;
+
+            default:
+                System.out.println("No válido");
+                return; // en vez de break xd
+        }
+
+        temp.setAmount(temp.getAmount() - product.getAmount());
+        product.setPrice(temp.getPrice() * 1.25);
+
+        sales.add(product);
+    }
+
+    public List<Product> getPurchases(){
+        return purchases;
+    }
+
+    public List<Product> getSales(){
+        return sales;
     }
 
 
