@@ -111,5 +111,15 @@ public class View {
         System.out.println("\t\t\t4. Volver");
     }
 
+    public static void Thanks(){
+
+        System.out.println("Gracias por utilizar mi app :)");
+    }
+
+    public static void showInvalidOption(){
+
+        System.out.println("Opción no válida");
+    }
+
 
 }
