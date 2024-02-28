@@ -1,15 +1,17 @@
 package team.ed.objects;
 
 import team.ed.storage.Database;
+import team.ed.views.View;
 
 public class Main {
     public static void main(String[] args) {
 
-        Database database = new Database();
-        Product product = database.getByIndex(0);
+        View.showHeaderPrincipal();
+        View.showMenuPrincipal();
+        View.showGetOption();
 
-        System.out.println(product);
-
+        int option = View.getOption();
+        System.out.println("La opción digitada fue: "+ option);
 
     }
 

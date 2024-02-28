@@ -11,20 +11,24 @@ public abstract class Product implements Cloneable{
     }
 
     public Product(String n){ // constructor
+
         this.name = n;
     }
 
 
     //getters & setters
     public String getName() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 
     public int getAmount() {
+
         return amount;
     }
 
@@ -38,6 +42,7 @@ public abstract class Product implements Cloneable{
     }
 
     public double getPrice() {
+
         return price;
     }
 
@@ -61,6 +66,7 @@ public abstract class Product implements Cloneable{
     }
 
     public Product clone() throws CloneNotSupportedException{
+
         return (Product) super.clone();
     }
 
