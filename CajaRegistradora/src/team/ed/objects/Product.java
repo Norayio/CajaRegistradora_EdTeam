@@ -1,6 +1,6 @@
 package team.ed.objects;
 
-public abstract class Product {
+public abstract class Product implements Cloneable{
 
     private String name; // nombre
     private int amount; // cantidad
@@ -60,6 +60,9 @@ public abstract class Product {
                 '}';
     }
 
+    public Product clone() throws CloneNotSupportedException{
+        return (Product) super.clone();
+    }
 
 
 

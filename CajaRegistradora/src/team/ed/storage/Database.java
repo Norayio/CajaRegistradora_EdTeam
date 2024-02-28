@@ -30,7 +30,13 @@ public class Database {
             System.out.println("Índice no válido");
             return null;
         }
-        return products[i];
+        Product result = null;
+        try {
+            result =  products[i].clone();
+        }catch (CloneNotSupportedException cnse){
+            System.out.println(cnse);
+        }
+        return result;
     }
 
     public Product[] getAll(){
