@@ -1,5 +1,9 @@
 package team.ed.controllers;
 
+import team.ed.objects.Meat;
+import team.ed.objects.Potato;
+import team.ed.objects.Product;
+import team.ed.objects.Rice;
 import team.ed.storage.Database;
 import team.ed.views.View;
 
@@ -24,7 +28,7 @@ public class Register {
 
             switch (option){
                 case 1:
-                    View.showBuyHeader();
+                    buy();
                     break;
 
                 case 2:
@@ -57,6 +61,62 @@ public class Register {
         }while (option < 1 || option > 6);
     }
 
+
+    // buy se encargará de mostrar el menú de compras
+    // y obtener la opción deseada por el usuario;
+    private void buy(){
+
+        View.showBuyHeader();
+        int option;
+        do {
+            View.showGetOption();
+            option = View.getOption();
+
+            if (option >= 1 && option <= 3){
+                buyProduct(option);
+            } else if (option == 4) {
+                View.showGetBack("Compras");
+            } else {
+                View.showInvalidOption();
+            }
+
+        }while (option < 1 || option > 4);
+    }
+
+
+
+    // registra en la base de datos el producto comprado;
+    public void buyProduct(int option){
+
+        Product product = null;
+
+        switch (option){
+            case 1:
+                product = new Potato("Sabanera");
+                break;
+
+            case 2:
+                product = new Rice("Una marca");
+                break;
+
+            case 3:
+                product = new Meat("Lomo fino");
+                break;
+
+            default:
+                View.showInvalidOption();
+        }
+        View.getAmount();
+        int amount = View.getAmount();
+
+        View.getPrice();
+        double price = View.getPrice();
+
+        product.setAmount(amount);
+        product.setPrice(price);
+
+        database.buy(product);
+    }
 
 
 
