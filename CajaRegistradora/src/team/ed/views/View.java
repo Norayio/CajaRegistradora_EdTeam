@@ -1,5 +1,7 @@
 package team.ed.views;
 
+import team.ed.objects.Product;
+
 import java.util.Scanner;
 
 public class View {
@@ -123,6 +125,22 @@ public class View {
 
     public static void showGetBack(String name){
         System.out.println("\t\t\tSaliendo del módulo..."+ name);
+    }
+
+    public static void showAnyKey(){
+        System.out.println("Digite cualquier número para continuar: ");
+    }
+
+
+    public static void showItemsStock(Product[] products){
+
+        for (Product v : products){
+            System.out.println("\t\t* "+v.getName()+"\t| "+v.getAmount()+"\t\t| "+v.getPrice()+"\t\t\t| "+v.getAmount()*v.getPrice()+"\t\t*");
+        }
+    }
+
+    public static void showInvalidAmount(){
+        System.out.println("La cantidad no es válida");
     }
 
 

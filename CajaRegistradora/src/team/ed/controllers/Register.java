@@ -19,10 +19,11 @@ public class Register {
     public void register(){
 
         int option;
-        View.showHeaderPrincipal();
-        View.showMenuPrincipal();
 
         do {
+            View.showHeaderPrincipal();
+            View.showMenuPrincipal();
+
             View.showGetOption();
             option = View.getOption();
 
@@ -32,11 +33,11 @@ public class Register {
                     break;
 
                 case 2:
-                    View.showSalesHeader();
+                    sale();
                     break;
 
                 case 3:
-                    View.showStockHeader();
+                    showStock();
                     break;
 
                 case 4:
@@ -49,7 +50,7 @@ public class Register {
 
                 case 6:
                     View.Thanks();
-                    // TODO agregar la salida del sistema;
+                    System.exit(0);
                     break;
 
                 default:
@@ -58,7 +59,7 @@ public class Register {
             } //
 
 
-        }while (option < 1 || option > 6);
+        }while (option >= 1 && option <= 6);
     }
 
 
@@ -76,6 +77,7 @@ public class Register {
                 buyProduct(option);
             } else if (option == 4) {
                 View.showGetBack("Compras");
+                return;
             } else {
                 View.showInvalidOption();
             }
@@ -86,7 +88,7 @@ public class Register {
 
 
     // registra en la base de datos el producto comprado;
-    public void buyProduct(int option){
+    private void buyProduct(int option){
 
         Product product = null;
 
@@ -106,16 +108,70 @@ public class Register {
             default:
                 View.showInvalidOption();
         }
-        View.getAmount();
+        View.showGetAmount();;
         int amount = View.getAmount();
 
-        View.getPrice();
+        View.showGetPrice();
         double price = View.getPrice();
 
         product.setAmount(amount);
         product.setPrice(price);
 
         database.buy(product);
+    }
+
+
+    private void showStock(){
+
+        View.showStockHeader();
+        View.showItemsStock(database.getAll());
+
+        View.showAnyKey();
+        View.getOption();
+    }
+
+    // se encargará de mostrar el menú de ventas y obtener la opción deseada por el usuario;
+    private void sale(){
+
+        View.showBuyHeader();
+        int option;
+        do {
+            View.showGetOption();
+            option = View.getOption();
+
+            if (option >= 1 && option <= 3){
+                saleProduct(option);
+            } else if (option == 4) {
+                View.showGetBack("Ventas");
+                return;
+            } else {
+                View.showInvalidOption();
+            }
+
+        }while (option < 1 || option > 4);
+    }
+
+    // registra en la base de datos el producto comprado;
+    private void saleProduct(int option){
+
+        Product product = null;
+
+        if (option < 1 || option > 3){
+            View.showInvalidOption();
+            return;
+        }
+
+        product = database.getByIndex(option - 1);
+        View.showGetAmount();
+
+        int amount = View.getAmount();
+        if (product.getAmount() < amount){
+            View.showInvalidAmount();
+            return;
+        }
+
+        product.setAmount(amount);
+        database.sale(product);
     }
 
 
