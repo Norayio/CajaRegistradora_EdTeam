@@ -7,6 +7,8 @@ import team.ed.objects.Rice;
 import team.ed.storage.Database;
 import team.ed.views.View;
 
+import java.util.List;
+
 public class Register {
 
     private Database database;
@@ -41,11 +43,11 @@ public class Register {
                     break;
 
                 case 4:
-                    View.showBuyListHeader();
+                    showPurchases();
                     break;
 
                 case 5:
-                    View.showSaleListHeader();
+                    showSales();
                     break;
 
                 case 6:
@@ -134,6 +136,7 @@ public class Register {
     private void sale(){
 
         View.showBuyHeader();
+
         int option;
         do {
             View.showGetOption();
@@ -174,6 +177,18 @@ public class Register {
         database.sale(product);
     }
 
+
+    private void showPurchases(){
+        List<Product> listado = database.getPurchases();
+        View.showBuyListHeader();
+        View.showPurchases(listado);
+    }
+
+    private void showSales(){
+        List<Product> listado = database.getSales();
+        View.showSalesHeader();
+        View.showPurchases(listado);
+    }
 
 
 
